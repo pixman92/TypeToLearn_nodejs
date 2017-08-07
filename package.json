@@ -9,6 +9,8 @@
   "author": "ChristianB",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "firebase": "^4.2.0",
+    "prompt": "^1.0.0"
   }
 }
