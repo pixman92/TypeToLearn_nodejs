@@ -1,0 +1,14 @@
+{
+  "name": "typetolearn",
+  "version": "1.0.0",
+  "description": "a nodejs project to send code from the server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ChristianB",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
