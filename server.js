@@ -10,9 +10,6 @@ var $ = require("jquery");
 var firebaseAuth = require("firebase-auth");
 
 //=============firebase============
-
-<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-<script>
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyCNWGJ75WnxPc_dlyS2bj06etO7fl2Jnp4",
@@ -23,7 +20,6 @@ var firebaseAuth = require("firebase-auth");
     messagingSenderId: "1310947487"
   };
   firebase.initializeApp(config);
-</script>
 
 //========================================
 
@@ -33,6 +29,12 @@ app.use(express.static('public'));
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
+
+
+
+
+
+
 
 //===============================
 var obj = {};
@@ -142,6 +144,13 @@ function runConsoleMe(){
 			if (result.something == "pathMe"){
 				pathMe(first);	
 			}
+			runConsoleMe();
 
-	}
+	});
 }
+
+// ========================================
+// listen for requests :)
+var listener = app.listen(3000, function () {
+  console.log('Your app is listening on port ' + listener.address().port);
+});
