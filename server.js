@@ -30,8 +30,32 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/code/:language/:num", function (request, response) {
+	//http request to print out code
 
+	if(request.params.language=="html"){
+		getFromFirebase("/html/beginner/"+request.params.num, function() {
+			// console.log("hello");
+			response.send("HTML rules!\n"+fromFirebase);
+		});
+	}
+	if(request.params.language=="javascript"){
+		getFromFirebase("/javascript/beginner/"+request.params.num, function() {
+			// console.log("hello");
+			response.send("JavaScript rules!\n"+fromFirebase);
+		});
+	}
+	if(request.params.language=="python"){
+		// getFromFirebase("/python/beginner/0", function () {
+		// 	response.send("python rules!" + fromFirebase);
+		// });
+		getFromFirebase("/python/beginner/"+request.params.num, function () {
+			response.send("python rules!" + fromFirebase);
+		});
 
+	}
+
+})
 
 
 
@@ -65,6 +89,19 @@ function pathMe (path){
   database.update(obj);
 }
 
+var fromFirebase;
+
+function getFromFirebase (pathToCode, callback) {
+	//function to get data from firebase,
+	//save to variable,
+	//send to response express route
+	var firebaseDB = firebase.database().ref('/users/code/'+pathToCode);
+	firebaseDB.once("value", function(snapshot){
+		console.log(snapshot.val());
+		fromFirebase = snapshot.val();
+		callback();
+	});
+}
 
 
 
@@ -143,6 +180,9 @@ function runConsoleMe(){
 			}
 			if (result.something == "pathMe"){
 				pathMe(first);	
+			}
+			if (result.something == "getFromFirebase"){
+				getFromFirebase(first);
 			}
 			runConsoleMe();
 
